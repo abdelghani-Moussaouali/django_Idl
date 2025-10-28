@@ -7,13 +7,14 @@ class UnivSerializer(serializers.ModelSerializer):
    fields = ['id', 'name','location']
 
 class StudentSerializer(serializers.ModelSerializer):
+  # that's like a resource to define univ how it's look in response
   univ = UnivSerializer(read_only=True)
+  
   univ_id = serializers.PrimaryKeyRelatedField(
       queryset=uiversity.objects.all(), 
       source='univ', 
       write_only=True, 
-      required=False,
-      allow_null=True
+      required=True, 
   )
 
   class Meta:
