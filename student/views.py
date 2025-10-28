@@ -15,29 +15,26 @@ def add_student(request):
 @api_view(['PUT'])
 def update_student(request, id):
     try:
-        student = student.objects.get(id=id)
+        student_ins = student.objects.get(id=id)
     except student.DoesNotExist:
         return Response({"error": "Student not found"}, status=404)
 
-    serializer = StudentSerializer(student, data=request.data, partial=True)
+    serializer = StudentSerializer(student_ins, data=request.data, partial=True)
     if serializer.is_valid():
         serializer.save()  
         return Response({"message": "Student updated successfully","student":serializer.data})
     return Response(serializer.errors, status=400)
 
 # delete student
-@api_view(['PUT'])
-def update_student(request, id):
+@api_view(['DELETE'])
+def delete_student(request, id):
     try:
-        student = student.objects.get(id=id)
+        student_ins = student.objects.get(id=id)
     except student.DoesNotExist:
         return Response({"error": "Student not found"}, status=404)
+    student_ins.delete()
+    return Response({"error": "student was deleted"}, status=200)
 
-    serializer = StudentSerializer(student, data=request.data, partial=True)
-    if serializer.is_valid():
-        serializer.save()  
-        return Response({"message": "Student updated successfully","student":serializer.data})
-    return Response(serializer.errors, status=400)
 
 # get all student
 @api_view(['GET'])
@@ -47,6 +44,7 @@ def get_all_students(request):
     return Response(serializer.data)
 
 
+# get all university
 @api_view(['GET'])
 def get_all_univ(request):
     Univs = uiversity.objects.all()
@@ -55,6 +53,7 @@ def get_all_univ(request):
 
 
 
+# add university
 @api_view(['POST'])
 def add_univ(request):
     serializer = UnivSerializer(data=request.data)

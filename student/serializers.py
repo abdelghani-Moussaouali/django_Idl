@@ -9,7 +9,6 @@ class UnivSerializer(serializers.ModelSerializer):
 class StudentSerializer(serializers.ModelSerializer):
   # that's like a resource to define univ how it's look in response
   univ = UnivSerializer(read_only=True)
-  
   univ_id = serializers.PrimaryKeyRelatedField(
       queryset=uiversity.objects.all(), 
       source='univ', 
