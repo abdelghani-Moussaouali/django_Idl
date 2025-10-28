@@ -26,7 +26,20 @@ def update_student(request, id):
     return Response(serializer.errors, status=400)
 
 # delete student
+@api_view(['PUT'])
+def update_student(request, id):
+    try:
+        student = student.objects.get(id=id)
+    except student.DoesNotExist:
+        return Response({"error": "Student not found"}, status=404)
 
+    serializer = StudentSerializer(student, data=request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()  
+        return Response({"message": "Student updated successfully","student":serializer.data})
+    return Response(serializer.errors, status=400)
+
+# get all student
 @api_view(['GET'])
 def get_all_students(request):
     students = student.objects.all()
