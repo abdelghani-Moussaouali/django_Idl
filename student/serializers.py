@@ -8,17 +8,17 @@ class UnivSerializer(serializers.ModelSerializer):
 
 class StudentSerializer(serializers.ModelSerializer):
   # that's like a resource to define univ how it's look in response
-  univ = UnivSerializer(read_only=True)
-  univ_id = serializers.PrimaryKeyRelatedField(
-      queryset=uiversity.objects.all(), 
-      source='univ', 
-      write_only=True, 
-      required=True, 
-  )
+  # univ = UnivSerializer(read_only=True)
+  # univ_id = serializers.PrimaryKeyRelatedField(
+  #     queryset=uiversity.objects.all(), 
+  #     source='univ', 
+  #     write_only=True, 
+  #     required=True, 
+  # )
 
   class Meta:
-        model = student
-        fields = ['id', 'first_name', 'last_name', 'email','univ', 'univ_id']
+    model = student
+    fields =('__all__')
 
 class CourseSerializer(serializers.ModelSerializer):
  class Meta:

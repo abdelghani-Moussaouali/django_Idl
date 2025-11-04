@@ -4,7 +4,8 @@ class student(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     email = models.EmailField()
-    univ = models.ForeignKey('uiversity',on_delete=models.CASCADE)
+    # univ = models.ForeignKey('uiversity',on_delete=models.CASCADE)
+    univ = models.IntegerField()
 
     def __str__(self):
         return self.first_name
@@ -17,11 +18,11 @@ class course(models.Model):
     schedule = models.CharField(max_length=30)
     
     def __str__(self):
-        return self.first_name
+        return self.name
     
     
 class studentCourse(models.Model):
-    student_id = models.ForeignKey('student',on_delete=models.CASCADE)
+    student_id = models.IntegerField()
     course_id = models.ForeignKey('course',on_delete=models.CASCADE)
     
     
