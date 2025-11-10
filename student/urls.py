@@ -1,5 +1,8 @@
 from django.contrib import admin
 from django.urls import path
+from graphene_django.views import GraphQLView
+from django.views.decorators.csrf import csrf_exempt
+
 from . import views
 urlpatterns = [
   
@@ -15,5 +18,8 @@ urlpatterns = [
   path('student/',view=views.get_all_student,name='get_all_student'),
   path('student/<int:id>/delete/',view=views.delete_student,name='delete_student'),
   path('student/<int:id>/update/',view=views.update_student,name='update_student'),
+  
+
+  path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=True))),
  
 ]

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'student',
     'rest_framework',
     'corsheaders',
+    'graphene_django',
 ]
 
 MIDDLEWARE = [
@@ -91,6 +92,9 @@ DATABASES = {
     }
 }
 
+GRAPHENE = {
+    "SCHEMA": "student.schema.schema"  
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
