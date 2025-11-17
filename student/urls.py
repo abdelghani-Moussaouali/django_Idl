@@ -13,11 +13,11 @@ urlpatterns = [
   path('course/<int:id>/update/',view=views.update_course,name='update_course'),
   path('course/search',view=views.search_courses,name='search_courses'),
   
-  # student routes
-  path('student/add/',view=views.add_student,name='add_student'),
-  path('student/',view=views.get_all_student,name='get_all_student'),
-  path('student/<int:id>/delete/',view=views.delete_student,name='delete_student'),
-  path('student/<int:id>/update/',view=views.update_student,name='update_student'),
+  # # student routes
+  # path('student/add/',view=views.add_student,name='add_student'),
+  # path('student/',view=views.get_all_student,name='get_all_student'),
+  # path('student/<int:id>/delete/',view=views.delete_student,name='delete_student'),
+  # path('student/<int:id>/update/',view=views.update_student,name='update_student'),
   
 
   path("graphql/", csrf_exempt(GraphQLView.as_view(graphiql=True))),
