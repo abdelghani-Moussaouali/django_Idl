@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import student, uiversity,course,studentCourse
-from .serializers import StudentSerializer , UnivSerializer ,CourseSerializer,StudentCourseSerializer
+from .models import course,studentCourse
+from .serializers import   CourseSerializer,StudentCourseSerializer
 from django.db.models import Q
 # add course
 @api_view(['POST'])
@@ -58,46 +58,28 @@ def search_courses(request):
     serializer = CourseSerializer(courses, many=True)
     return Response(serializer.data)
 
-# add student
-@api_view(['POST'])
-def add_student(request):
-    serializer = StudentSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response({"message": "New student is added"})
-    return Response(serializer.errors, status=400)
-
-# get all student
+# get all StudentCourse
 @api_view(['GET'])
-def get_all_student(request):
-    students = student.objects.all()
-    serializer = StudentSerializer(students, many=True)
+def get_student_course(request):
+    studentcourse = studentCourse.objects.all()
+    serializer = StudentCourseSerializer(studentcourse, many=True)
     return Response(serializer.data)
 
 
-
-# delete student
-@api_view(['DELETE'])
-def delete_student(request, id):
-    try:
-        students_ins = student.objects.get(id=id)
-    except student.DoesNotExist:
-        return Response({"error": "student not found"}, status=404)
-    students_ins.delete()
-    return Response({"error": "student was deleted"}, status=200)
-
-# update student
-@api_view(['PUT'])
-def update_student(request, id):
-    try:
-        student_ins = student.objects.get(id=id)
-    except student.DoesNotExist:
-        return Response({"error": "student not found"}, status=404)
-
-    serializer = StudentSerializer(student_ins, data=request.data, partial=True)
+@api_view(['POST'])
+def add_student_course(request):
+    serializer = StudentCourseSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save()  
-        return Response({"message": "student updated successfully","student":serializer.data})
+        serializer.save()
+        return Response({"message": "New student_course is added","student_course":serializer.data})
     return Response(serializer.errors, status=400)
 
 
+@api_view(['DELETE'])
+def delete_student_course(request, id):
+    try:
+        student_course_ins = studentCourse.objects.get(id=id)
+    except studentCourse.DoesNotExist:
+        return Response({"error": "student Course not found"}, status=404)
+    student_course_ins.delete()
+    return Response({"error": "student Course was deleted"}, status=200)
