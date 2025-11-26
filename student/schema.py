@@ -1,19 +1,19 @@
 import graphene
 from graphene_django import DjangoObjectType
+from .models import course
 
-from .models import student
 
-class StudentType(DjangoObjectType):
+class CourseType(DjangoObjectType):
     class Meta:
-        model = student
-        fields = ("id","first_name", "last_name", "email")
+        model = course
+        fields = ("id", "name", "instructor", "category", "schedule")
+
 
 class Query(graphene.ObjectType):
-    student = graphene.List(StudentType,)
+    courses = graphene.List(CourseType)
 
-    def resolve_student(root, info):
-        qs = student.objects.all()
-        
-        return qs
-    
+    def resolve_courses(root, info):
+        return course.objects.all()
+
+
 schema = graphene.Schema(query=Query)

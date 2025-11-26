@@ -1,12 +1,12 @@
 from rest_framework import serializers
-from .models import student, uiversity,course,studentCourse
+from .models import course,studentCourse
 
-class UnivSerializer(serializers.ModelSerializer):
- class Meta:
-   model = uiversity
-   fields = ['id', 'name','location']
+# class UnivSerializer(serializers.ModelSerializer):
+#  class Meta:
+#    model = uiversity
+#    fields = ['id', 'name','location']
 
-class StudentSerializer(serializers.ModelSerializer):
+# class StudentSerializer(serializers.ModelSerializer):
   # that's like a resource to define univ how it's look in response
   # univ = UnivSerializer(read_only=True)
   # univ_id = serializers.PrimaryKeyRelatedField(
@@ -16,9 +16,9 @@ class StudentSerializer(serializers.ModelSerializer):
   #     required=True, 
   # )
 
-  class Meta:
-    model = student
-    fields =('__all__')
+  # class Meta:
+  #   model = student
+  #   fields =('__all__')
 
 class CourseSerializer(serializers.ModelSerializer):
  class Meta:
