@@ -1,15 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
-# class student(models.Model):
-#     first_name = models.CharField(max_length=30)
-#     last_name = models.CharField(max_length=30)
-#     email = models.EmailField()
-#     univ = models.IntegerField()
 
-#     def __str__(self):
-#         return self.first_name
-    
-    
 class course(models.Model):
     name = models.CharField(max_length=30)
     instructor = models.CharField(max_length=30)
@@ -22,15 +12,6 @@ class course(models.Model):
     
 class studentCourse(models.Model):
     student_id = models.IntegerField()
-    course_id =  models.IntegerField()
+    course_id = models.ForeignKey(course, on_delete=models.CASCADE)
     def __str__(self):
-        return self.name
-    
-    
-
-# class uiversity(models.Model):
-#     name = models.CharField(max_length=30)
-#     location = models.CharField(max_length=30)
-
-#     def __str__(self):
-#         return self.name
+        return self.student_id
